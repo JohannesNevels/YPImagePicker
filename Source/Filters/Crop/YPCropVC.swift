@@ -39,27 +39,24 @@ open class YPCropVC: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        setupToolbar()
+        setupBarButtons()
         setupGestureRecognizers()
     }
     
-    func setupToolbar() {
-        let cancelButton = UIBarButtonItem(title: YPConfig.wordings.cancel,
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(cancel))
-        cancelButton.tintColor = .ypLabel
-        cancelButton.setFont(font: YPConfig.fonts.leftBarButtonFont, forState: .normal)
+   fileprivate func setupBarButtons() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(cancel))
+        navigationItem.leftBarButtonItem?.tintColor = YPConfig.colors.tintColor
+        navigationItem.leftBarButtonItem?.setFont(font: YPConfig.fonts.rightBarButtonFont, forState: .normal)
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        let saveButton = UIBarButtonItem(title: YPConfig.wordings.save,
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(done))
-        saveButton.setFont(font: YPConfig.fonts.rightBarButtonFont, forState: .normal)
-        saveButton.tintColor = .ypLabel
-        v.toolbar.items = [cancelButton, flexibleSpace, saveButton]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.save,
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(done))
+        navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
+        navigationItem.rightBarButtonItem?.setFont(font: YPConfig.fonts.rightBarButtonFont, forState: .normal)
     }
     
     func setupGestureRecognizers() {
