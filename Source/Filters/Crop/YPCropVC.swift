@@ -76,7 +76,11 @@ open class YPCropVC: UIViewController {
     
     @objc
     func cancel() {
-        navigationController?.popViewController(animated: true)
+        if presentingViewController != nil {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc
