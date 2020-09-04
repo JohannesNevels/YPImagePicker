@@ -162,6 +162,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                 if !self.multipleSelectionEnabled {
                     self.selection.removeAll()
                 }
+                self.multipleSelectionEnabled = !self.multipleSelectionEnabled
                 self.showMultipleSelection()
             }
         }
@@ -173,9 +174,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         if YPConfig.library.minNumberOfItems > 1 && multipleSelectionEnabled {
             return
         }
-        
-        multipleSelectionEnabled = !multipleSelectionEnabled
-        
+                
         if multipleSelectionEnabled {
             if selection.isEmpty && YPConfig.library.preSelectItemOnMultipleSelection,
 				delegate?.libraryViewShouldAddToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0),
