@@ -123,10 +123,11 @@ override open func viewDidLoad() {
                 if YPConfig.showsPhotoFilters {
                     let filterVC = YPPhotoFiltersVC(inputPhoto: photo,
                                                     isFromSelectionVC: false)
-                    // Show filters and then crop
+                    // Show filters and skip crop
                     filterVC.didSave = { outputMedia in
                         if case let YPMediaItem.photo(outputPhoto) = outputMedia {
-                            showCropVC(photo: outputPhoto, completion: completion)
+                            //showCropVC(photo: outputPhoto, completion: completion)
+                            completion(outputPhoto)
                         }
                     }
                     self?.pushViewController(filterVC, animated: false)
