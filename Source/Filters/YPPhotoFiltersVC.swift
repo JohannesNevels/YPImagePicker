@@ -78,6 +78,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         
         // Setup of Navigation Bar
         title = YPConfig.wordings.filter
+        
         if isFromSelectionVC {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
                                                                style: .plain,
@@ -85,7 +86,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
                                                                action: #selector(cancel))
             navigationItem.leftBarButtonItem?.setFont(font: YPConfig.fonts.leftBarButtonFont, forState: .normal)
         }
-        setupRightBarButton()
+        setupRightBarButtons()
         
         YPHelper.changeBackButtonIcon(self)
         YPHelper.changeBackButtonTitle(self)
@@ -99,9 +100,29 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         v.imageView.isUserInteractionEnabled = true
     }
     
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let navigationBar = self.navigationController?.navigationBar
+
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+        navigationBar?.shadowImage = UIImage()
+        navigationBar?.isTranslucent = true
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let navigationBar = self.navigationController?.navigationBar
+
+         navigationBar?.shadowImage = nil
+         navigationBar?.setBackgroundImage(nil, for: .default)
+         navigationBar?.isTranslucent = false
+    }
+    
     // MARK: Setup - ⚙️
     
-    fileprivate func setupRightBarButton() {
+    fileprivate func setupRightBarButtons() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.save,
                                                             style: .done,
                                                             target: self,
@@ -159,7 +180,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
             }
             DispatchQueue.main.async {
                 didSave(YPMediaItem.photo(p: self.inputPhoto))
-                self.setupRightBarButton()
+                self.setupRightBarButtons()
             }
         }
     }
