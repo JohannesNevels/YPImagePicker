@@ -43,6 +43,26 @@ open class YPCropVC: UIViewController {
         setupGestureRecognizers()
     }
     
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let navigationBar = self.navigationController?.navigationBar
+
+        navigationBar?.setBackgroundImage(UIImage(), for: .default)
+        navigationBar?.shadowImage = UIImage()
+        navigationBar?.isTranslucent = true
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let navigationBar = self.navigationController?.navigationBar
+
+         navigationBar?.shadowImage = nil
+         navigationBar?.setBackgroundImage(nil, for: .default)
+         navigationBar?.isTranslucent = false
+    }
+    
    fileprivate func setupBarButtons() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
                                                             style: .done,

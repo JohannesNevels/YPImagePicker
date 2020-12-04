@@ -270,7 +270,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         switch mode {
         case .library:
             setTitleViewWithTitle(aTitle: libraryVC?.title ?? "")
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.done,
                                                                 style: .done,
                                                                 target: self,
                                                                 action: #selector(done))
